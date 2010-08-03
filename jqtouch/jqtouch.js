@@ -368,8 +368,8 @@
             // Define callback to run after animation completes
             var callback = function animationEnd(event) {
 
-                fromPage[0].removeEventListener('webkitTransitionEnd', callback);
-                fromPage[0].removeEventListener('webkitAnimationEnd', callback);
+                fromPage[0].removeEventListener('webkitTransitionEnd', callback, false);
+                fromPage[0].removeEventListener('webkitAnimationEnd', callback, false);
 
                 if (animation) {
                         toPage.removeClass('start in ' + animation.name);
@@ -484,7 +484,7 @@
                         var firstPage = insertPages(data, settings.animation);
                         if (firstPage) {
                             if (settings.method == 'GET' && jQTSettings.cacheGetRequests === true && settings.$referrer) {
-                                settings.$referrer.attr('href', '#' + firstPage.attr('id'));
+                                settings.$referrer.attr('href', '#' + firstPage.attr('id').replace(/(:|\.)/g,'\\$1'));
                             }
                             if (settings.callback) {
                                 settings.callback(true);
